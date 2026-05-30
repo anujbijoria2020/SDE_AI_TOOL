@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "axios": "^1.16.1",
+    "mermaid": "^11.15.0"
+  }
+}
