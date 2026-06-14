@@ -1,8 +1,7 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from app.core.database import Base
-from sqlalchemy.dialects.postgresql import JSONB
 
 class Project(Base):
     __tablename__ = "projects"
@@ -11,8 +10,8 @@ class Project(Base):
     title = Column(String, nullable=False)
     description = Column(String, nullable=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     # Relationships
     owner = relationship("User", back_populates="projects")
@@ -24,8 +23,8 @@ class GeneratedArtifact(Base):
     id = Column(Integer, primary_key=True, index=True)
     project_id = Column(Integer, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False)
     artifact_type = Column(String, nullable=False)  # e.g., 'srs', 'architecture', 'api', 'db'
-    content = Column(JSONB, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    content = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     # Relationships
     project = relationship("Project", back_populates="artifacts")

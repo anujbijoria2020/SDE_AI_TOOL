@@ -32,11 +32,3 @@ app.include_router(projects_router, prefix="/api/projects", tags=["Projects"])
 @app.get("/")
 def root():
     return {"message": "SE Assistant API is running"}
-
-@app.get("/test-models")
-def list_models():
-    models = []
-    for m in genai.list_models():
-        if "generateContent" in m.supported_generation_methods:
-            models.append(m.name)
-    return {"available_models": models}

@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-main: #FFFFFF;
+  --color-bg-sidebar: #F7F7F8;
+  --color-border-main: #E5E5E5;
+  --color-text-primary: #1A1A1A;
+  --color-text-muted: #6B6B6B;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-hover-bg: #F0F0F0;
+}
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
+}
+
+/* Custom scrollbar to look sleek and modern like Claude */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-main);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Extra utility styles for smooth transitions */
+.transition-sidebar {
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media print {
+  body.print-srs-active #root,
+  body.print-srs-active .no-print {
+    display: none !important;
+  }
+  body.print-srs-active #print-section {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white !important;
+    color: #1A1A1A !important;
+    padding: 24px !important;
+  }
+  body.print-srs-active {
+    background: white !important;
+    color: #1A1A1A !important;
+  }
+}
